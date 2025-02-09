@@ -117,6 +117,7 @@
 						src={event.imageUrl}
 						alt={event.title}
 						class="w-full h-48 object-cover"
+						loading="lazy"
 					/>
 					<div class="p-4">
 						<h2 class="text-xl font-semibold text-gray-800 mb-2">

@@ -20,11 +20,10 @@ app.post("/api/email", async (req, res) => {
   res.send("sucess");
 });
 
-connectToDatabase().then(
-  () =>
-    //  fetchEvents().then(() =>
+connectToDatabase().then(() =>
+  fetchEvents().then(() =>
     app.listen(port, () => {
       return console.log(`listening at http://localhost:${port}`);
     }),
-  // ),
+  ),
 );
