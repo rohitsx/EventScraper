@@ -11,6 +11,7 @@ app.use(cors());
 
 app.get("/api", async (req, res) => {
   const db = getDb();
+  console.log("recived api request");
   const data = await db.collection("events").find({}).toArray();
   res.send(data);
 });
