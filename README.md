@@ -8,8 +8,8 @@
 ### Server Setup  
 
 ```bash
-git clone https://github.com/devrohit/EventScraper.git
 cd EventScraper/server
+//add key.json from Vertex Ai
 docker-compose up -d
 ```
 
