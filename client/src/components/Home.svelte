@@ -119,25 +119,28 @@
 						class="w-full h-48 object-cover"
 						loading="lazy"
 					/>
-					<div class="p-4">
-						<h2 class="text-xl font-semibold text-gray-800 mb-2">
-							{event.title}
-						</h2>
-						<p class="text-gray-600 text-sm mb-2">
-							{event.location}
-						</p>
-						<div class="text-sm text-gray-500 mb-4">
-							<p>From: {formatDate(event.dates.start)}</p>
-							<p>To: {formatDate(event.dates.end)}</p>
-						</div>
-						<button
-							on:click={() =>
-								handleLearnMoreClick(event.eventUrl)}
-							class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
-						>
-							GET TICKETS
-						</button>
-					</div>
+<div class="p-4">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">
+        {event.title}
+    </h2>
+    <p class="text-gray-600 text-sm mb-2">
+        {event.location}
+    </p>
+    <div class="text-sm text-gray-500 mb-4">
+        <p>From: {formatDate(event.dates.start)}</p>
+        <p>To: {formatDate(event.dates.end)}</p>
+    </div>
+    <!-- Add description here -->
+    <p class="text-gray-600 text-sm mb-4">
+        {event.discription}
+    </p>
+    <button
+        on:click={() => handleLearnMoreClick(event.eventUrl)}
+        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
+    >
+        GET TICKETS
+    </button>
+</div>
 				</div>
 			{/each}
 		</div>

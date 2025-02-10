@@ -1,6 +1,7 @@
 <script lang="ts">
+	import Chatbot from "./components/Chatbot.svelte";
 	import Home from "./components/Home.svelte";
-	import Layout from "./lib/Layout.svelte";
 </script>
 
-<Layout><Home /></Layout>
+<Chatbot />
+<Home />

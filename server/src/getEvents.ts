@@ -1,9 +1,11 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { getDb } from "./config/database";
+import { vectorStore } from "./config/vectorDb";
 
 const fetchEvents = async () => {
   const events = [];
+  const eventsTitle = [];
   const url = "https://www.sydney.com/events/march?page=";
   const numberOfPages = await getNumberOfPage(url + 0);
   const db = getDb();
@@ -11,12 +13,16 @@ const fetchEvents = async () => {
   let i = 0;
 
   while (i < Number(numberOfPages)) {
-    await fetchEventsByPage(url + i, events);
+    await fetchEventsByPage(url + i, events, eventsTitle);
     i++;
   }
 
-  db.collection("events").deleteMany({});
-  db.collection("events").insertMany(events);
+  //stroing data into mongodb
+  await db.collection("events").deleteMany({});
+  await db.collection("events").insertMany(events);
+
+  //stroing data into faiss
+  await vectorStore.addDocuments(eventsTitle);
 };
 
 async function getNumberOfPage(url: string) {
@@ -28,7 +34,7 @@ async function getNumberOfPage(url: string) {
   return numberOfPages;
 }
 
-async function fetchEventsByPage(url: string, events: any) {
+async function fetchEventsByPage(url: string, events: any, eventsTitle: any) {
   const { data } = await axios.get(url);
   const $ = cheerio.load(data);
 
@@ -37,6 +43,9 @@ async function fetchEventsByPage(url: string, events: any) {
     // Extract image URL from the source set
     const imgElement = $element.find("img[loading='lazy']");
     const imageUrl = imgElement.attr("data-src") || "";
+
+    const discription =
+      $element.find("div[itemprop=description]").text().trim() || "";
 
     // Extract title and URL
     const linkElement = $element.find('a[target="_blank"]');
@@ -66,6 +75,18 @@ async function fetchEventsByPage(url: string, events: any) {
         end: endDate,
       },
       location: location,
+      discription,
+    });
+
+    eventsTitle.push({
+      pageContent: title.replace("Open in a new window", "").trim(),
+      metadata: {
+        location: location,
+        startDate: startDate,
+        endDate: endDate,
+        source: "sydney.com",
+        discription,
+      },
     });
   });
 }
