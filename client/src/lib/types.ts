@@ -10,4 +10,5 @@ export interface Event {
   eventUrl: string;
   dates: EventDates;
   location: string;
+  description: string;
 }
