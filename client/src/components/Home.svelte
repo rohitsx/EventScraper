@@ -89,8 +89,10 @@
 </script>
 
 <!-- Main Content -->
-<div class="container mx-auto px-32 py-8">
-	<h1 class="text-3xl font-bold mb-8 text-gray-800">Sydney Events</h1>
+<div class="container mx-auto px-4 sm:px-8 md:px-16 lg:px-32 py-8">
+	<h1 class="text-2xl sm:text-3xl font-bold mb-8 text-gray-800">
+		Sydney Events
+	</h1>
 
 	{#if isLoading}
 		<!-- Loading Spinner -->
@@ -108,7 +110,9 @@
 		</div>
 	{:else}
 		<!-- Event Grid -->
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		<div
+			class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+		>
 			{#each events as event (event._id)}
 				<div
 					class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
@@ -119,28 +123,28 @@
 						class="w-full h-48 object-cover"
 						loading="lazy"
 					/>
-<div class="p-4">
-    <h2 class="text-xl font-semibold text-gray-800 mb-2">
-        {event.title}
-    </h2>
-    <p class="text-gray-600 text-sm mb-2">
-        {event.location}
-    </p>
-    <div class="text-sm text-gray-500 mb-4">
-        <p>From: {formatDate(event.dates.start)}</p>
-        <p>To: {formatDate(event.dates.end)}</p>
-    </div>
-    <!-- Add description here -->
-    <p class="text-gray-600 text-sm mb-4">
-        {event.discription}
-    </p>
-    <button
-        on:click={() => handleLearnMoreClick(event.eventUrl)}
-        class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
-    >
-        GET TICKETS
-    </button>
-</div>
+					<div class="p-4">
+						<h2 class="text-xl font-semibold text-gray-800 mb-2">
+							{event.title}
+						</h2>
+						<p class="text-gray-600 text-sm mb-2">
+							{event.location}
+						</p>
+						<div class="text-sm text-gray-500 mb-4">
+							<p>From: {formatDate(event.dates.start)}</p>
+							<p>To: {formatDate(event.dates.end)}</p>
+						</div>
+						<p class="text-gray-600 text-sm mb-4">
+							{event.discription}
+						</p>
+						<button
+							on:click={() =>
+								handleLearnMoreClick(event.eventUrl)}
+							class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
+						>
+							GET TICKETS
+						</button>
+					</div>
 				</div>
 			{/each}
 		</div>
@@ -150,7 +154,7 @@
 <!-- Modal -->
 {#if isModalVisible}
 	<div
-		class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+		class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
 	>
 		<div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
 			<h2 class="text-2xl font-bold mb-4">Subscribe to Continue</h2>
