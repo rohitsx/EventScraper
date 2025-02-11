@@ -18,7 +18,7 @@ docker-compose up -d
 
 ```bash
 cd EventScraper/client
-//add env for server VITE_API=http://localhost:3001/api
+//add .env for client VITE_API=http://localhost:3001/api
 pnpm i
 dev: pnpm run dev
 build: pnpm run build
