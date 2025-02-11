@@ -28,11 +28,10 @@ app.post("/api/chat", async (req, res) => {
   res.send({ botres });
 });
 
-connectToDatabase().then(
-  () =>
-    //  fetchEvents().then(() =>
+connectToDatabase().then(() =>
+  fetchEvents().then(() =>
     app.listen(port, () => {
       return console.log(`listening at http://localhost:${port}`);
     }),
-  // ),
+  ),
 );
